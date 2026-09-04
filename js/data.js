@@ -204,42 +204,43 @@ const PROJECTS = [
     status: "nearly-finished",
     category: "main",
     tags: ["Accounting", "Ledger"],
-    description: "Bitcoin Cash accounting ledger that turns a BCH address into an organized accounting view.",
-    longDescription: "Already functional. What remains is a custom domain and final polish before permanent launch.",
-    whyBuilt: "Turn raw address activity into a clear accounting view.",
+    description: "Bitcoin Cash accounting ledger that turns a BCH address into an organized accounting view. Live and usable — needs custom domain + final polish.",
+    longDescription: "BCHBooks is already functional on Vercel. It turns a BCH address into an organized accounting view. What remains before a permanent production launch is a custom domain, final polish, and community support to keep it maintained.",
+    whyBuilt: "Turn raw address activity into a clear accounting view for holders and builders.",
     features: [
       "Address-based accounting view",
       "Organized ledger presentation",
-      "Functional core already live"
+      "Functional core already live at bchbooks.vercel.app"
     ],
     dataSources: null,
-    whatsNext: "Custom domain + final polish.",
+    whatsNext: "Custom domain + final polish. Community support helps move it from temporary deploy to permanent home.",
     liveUrl: "https://bchbooks.vercel.app",
     githubUrl: null,
-    needs: "Custom domain + final polish",
-    supportNeeded: ["funding"]
+    needs: "Custom domain + final polish + community support",
+    supportNeeded: ["funding", "feedback"]
   },
   {
     name: "CASHRUSH",
     slug: "cashrush",
     status: "nearly-finished",
     category: "games",
-    tags: ["Game", "Browser", "Discoverability"],
-    description: "A fast browser game. Play first. Discover the rest later.",
-    longDescription: "CASHRUSH is a fast browser game inspired by the simple games people can play instantly — no accounts, no complicated onboarding, no long instructions. Players chase scores, unlock achievements, and return to beat previous runs. Somewhere between the obstacles and progression, they may begin discovering a world connected to Bitcoin Cash. No classroom. No forced lesson. The game comes first. Curiosity comes naturally.",
-    whyBuilt: "Simple games become daily habits. Bitcoin Cash can live inside a world people already want to return to — without interrupting the fun to lecture.",
+    tags: ["Game", "Browser", "Discoverability", "Onboarding"],
+    description: "A fast browser game — already playable. Play first. Discover the rest later. Needs custom domain, polish, feedback, and community love.",
+    longDescription: "CASHRUSH is live and playable at cashrush-play.vercel.app. It is a fast browser game inspired by simple games people can play instantly — no accounts, no complicated onboarding, no long instructions. Players chase scores, unlock achievements, and return to beat previous runs. Somewhere between the obstacles and progression, they may begin discovering a world connected to Bitcoin Cash. No classroom. No forced lesson. The game comes first. Curiosity comes naturally. What it still needs: a custom domain, more polish, player feedback, and community support so it can become a strong, gentle onboarding path into the ecosystem — and more.",
+    whyBuilt: "Simple games become daily habits. Bitcoin Cash can live inside a world people already want to return to — without interrupting the fun to lecture. CASHRUSH aims to be that kind of onboarding tool: play first, discover later.",
     features: [
+      "Already playable in the browser",
       "Instant play, no account required",
       "Score chasing and achievement system",
       "Subtle connection to Bitcoin Cash inside the world",
       "Future potential for optional BCH / CashToken integrations"
     ],
     dataSources: null,
-    whatsNext: "Approaching completion. Gameplay first; optional BCH integrations later.",
-    liveUrl: null,
+    whatsNext: "Custom domain, polish, feedback, and community support. Gameplay is live; optional BCH integrations remain future work.",
+    liveUrl: "https://cashrush-play.vercel.app",
     githubUrl: null,
-    needs: "Final polish and launch support",
-    supportNeeded: ["funding", "feedback"],
+    needs: "Custom domain + polish + feedback + community support",
+    supportNeeded: ["funding", "feedback", "users"],
     special: "cashrush"
   },
   {
@@ -418,8 +419,11 @@ function getFinished() {
 }
 function getLab() {
   return PROJECTS.filter(p =>
-    p.status === "beta" || p.status === "in-development" || p.status === "experimental"
+    p.status === "beta" || p.status === "in-development" || p.status === "experimental" || p.status === "nearly-finished"
   );
+}
+function getInProgress() {
+  return getLab();
 }
 function getAwaiting() {
   return PROJECTS.filter(p =>
