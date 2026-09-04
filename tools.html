@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Tools — BCHtools.cash</title>
+<meta name="description" content="Browse all independent Bitcoin Cash tools. Filter by status and category. Open, source, feedback.">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand"><span class="cursor"></span> BCHTOOLS</a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html" class="active">The Tools</a></li>
+        <li><a href="finished.html">Finished</a></li>
+        <li><a href="lab.html">In the Lab</a></li>
+        <li><a href="awaiting.html">Awaiting Signal</a></li>
+        <li><a href="cashrush.html">CASHRUSH</a></li>
+        <li><a href="fundmetools.html">Fund Me Tools</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <a href="fundmetools.html" class="nav-cta">Fund Me</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="page-header">
+    <div class="wrap">
+      <div class="page-num">02 // THE TOOLS</div>
+      <h1>The full collection</h1>
+      <p class="lede">Every tool in the universe. Filter by status or category. Open what is live. Inspect what is open source.</p>
+    </div>
+  </div>
+  <section>
+    <div class="wrap">
+      <div class="filter-bar">
+        <div class="filter-group" id="filterStatus">
+          <button class="chip active" data-value="all">All</button>
+          <button class="chip" data-value="finished">Finished</button>
+          <button class="chip" data-value="nearly-finished">Nearly Finished</button>
+          <button class="chip" data-value="beta">Beta</button>
+          <button class="chip" data-value="in-development">In the Lab</button>
+        </div>
+        <div class="filter-group" id="filterCategory">
+          <button class="chip active" data-value="all">All categories</button>
+          <button class="chip" data-value="main">Ecosystem</button>
+          <button class="chip" data-value="defi">DeFi</button>
+          <button class="chip" data-value="community">Community</button>
+          <button class="chip" data-value="games">Games</button>
+        </div>
+        <input type="search" class="search-input" id="searchInput" placeholder="Search…" aria-label="Search">
+      </div>
+      <div class="result-count" id="resultCount"></div>
+      <div class="project-grid" id="projectGrid"></div>
+    </div>
+  </section>
+</main>
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <div class="brand"><span class="cursor"></span> BCHTOOLS.CASH</div>
+      <p class="footer-note">Independent Bitcoin Cash tools. Free to use. Community-supported.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="fundmetools.html">Fund Me</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://github.com/alberdioni8406/bchhub" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+  </div>
+  <div class="wrap footer-bottom">© <span id="year"></span> BCHtools</div>
+</footer>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script>
+BCH.boot();
+const state = { status: "all", category: "all", query: "" };
+function matches(p) {
+  if (state.status !== "all" && p.status !== state.status) return false;
+  if (state.category !== "all" && p.category !== state.category) return false;
+  if (state.query) {
+    const q = state.query.toLowerCase();
+    const hay = (p.name + " " + p.description + " " + (p.tags||[]).join(" ")).toLowerCase();
+    if (!hay.includes(q)) return false;
+  }
+  return true;
+}
+function render() {
+  const filtered = PROJECTS.filter(matches);
+  BCH.renderGrid("projectGrid", filtered);
+  document.getElementById("resultCount").textContent = filtered.length + " of " + PROJECTS.length + " tools";
+}
+function wire(id, key) {
+  const c = document.getElementById(id);
+  c.addEventListener("click", e => {
+    const btn = e.target.closest(".chip");
+    if (!btn) return;
+    c.querySelectorAll(".chip").forEach(x => x.classList.remove("active"));
+    btn.classList.add("active");
+    state[key] = btn.dataset.value;
+    render();
+  });
+}
+wire("filterStatus", "status");
+wire("filterCategory", "category");
+document.getElementById("searchInput").addEventListener("input", e => {
+  state.query = e.target.value.trim();
+  render();
+});
+render();
+</script>
+</body>
+</html>

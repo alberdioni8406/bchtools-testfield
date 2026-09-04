@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>In the Lab — BCHtools.cash</title>
+<meta name="description" content="Active experiments and tools still being built for Bitcoin Cash. Not failures — unfinished work.">
+<meta property="og:title" content="In the Lab — BCHtools.cash">
+<meta property="og:description" content="Some things are still being built. You are looking inside the lab.">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand"><span class="cursor"></span> BCHTOOLS</a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html">The Tools</a></li>
+        <li><a href="finished.html">Finished</a></li>
+        <li><a href="lab.html" class="active">In the Lab</a></li>
+        <li><a href="awaiting.html">Awaiting Signal</a></li>
+        <li><a href="cashrush.html">CASHRUSH</a></li>
+        <li><a href="fundmetools.html">Fund Me Tools</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <a href="fundmetools.html" class="nav-cta">Fund Me</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="page-header">
+    <div class="wrap">
+      <div class="page-num">04 // IN THE LAB</div>
+      <h1>Some things are still being built.</h1>
+      <p class="lede">You are looking inside the lab. Innovation does not appear fully formed. These are active experiments — beta, in development, and experimental work.</p>
+    </div>
+  </div>
+  <section>
+    <div class="wrap">
+      <div class="signal-block" style="margin-bottom:28px;">
+        <p>Unfinished does not mean abandoned.</p>
+        <p>It means the work is still happening — or waiting for the right signal to continue.</p>
+      </div>
+      <div class="project-grid" id="projectGrid"></div>
+      <div class="hero-actions mt-24">
+        <a href="awaiting.html" class="btn btn-ghost">Projects awaiting signal →</a>
+        <a href="fundmetools.html" class="btn btn-primary">Fund the lab</a>
+      </div>
+    </div>
+  </section>
+</main>
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <div class="brand"><span class="cursor"></span> BCHTOOLS.CASH</div>
+      <p class="footer-note">Independent Bitcoin Cash tools. Free to use. Community-supported.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="finished.html">Finished</a></li>
+      <li><a href="fundmetools.html">Fund Me</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://github.com/alberdioni8406/bchhub" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+  </div>
+  <div class="wrap footer-bottom">© <span id="year"></span> BCHtools</div>
+</footer>
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script>
+BCH.boot();
+BCH.renderGrid("projectGrid", getLab());
+</script>
+</body>
+</html>

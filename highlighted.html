@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Highlighted — BCHtools.cash</title>
+<meta name="description" content="Selected projects worth your attention. Editorial signals from the BCHtools universe — not rankings, not hype.">
+<meta property="og:title" content="Highlighted — Look at this. This is worth your time.">
+<meta property="og:description" content="Manually selected projects from the independent Bitcoin Cash tool collection.">
+<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<header class="site-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand"><span class="cursor"></span> BCHTOOLS</a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tools.html">The Tools</a></li>
+        <li><a href="finished.html">Finished</a></li>
+        <li><a href="lab.html">In the Lab</a></li>
+        <li><a href="awaiting.html">Awaiting Signal</a></li>
+        <li><a href="cashrush.html">CASHRUSH</a></li>
+        <li><a href="fundmetools.html">Fund Me Tools</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <a href="fundmetools.html" class="nav-cta">Fund Me</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="page-header">
+    <div class="wrap">
+      <div class="page-num">06 // HIGHLIGHTED</div>
+      <h1>Look at this.<br><span class="accent">This is worth your time.</span></h1>
+      <p class="lede">Editorial signals — not rankings, not paid placement, not invented metrics. A small set of projects the collection is pointing at right now.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="project-grid" id="highlightedGrid"></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <p class="eyebrow">HOW THIS WORKS</p>
+      <div class="signal-block">
+        <p>Selection is manual. Change the list in data.js via HIGHLIGHTED_SLUGS.</p>
+        <p>No fake “top tools.” No engagement farming. Just a clear pointer: try these.</p>
+      </div>
+      <div class="hero-actions mt-24">
+        <a href="tools.html" class="btn btn-ghost">Full collection</a>
+        <a href="fundmetools.html" class="btn btn-primary">Fund Me Tools</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" role="dialog" aria-modal="true">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <div class="brand"><span class="cursor"></span> BCHTOOLS.CASH</div>
+      <p class="footer-note">Independent Bitcoin Cash tools. Free to use. Community-supported. No deadlines.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="tools.html">Tools</a></li>
+      <li><a href="fundmetools.html">Fund Me</a></li>
+      <li><a href="cashrush.html">CASHRUSH</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://github.com/alberdioni8406/bchhub" target="_blank" rel="noopener">Source</a></li>
+      <li><a href="https://x.com/alberdioni8406_" target="_blank" rel="noopener">X</a></li>
+    </ul>
+  </div>
+  <div class="wrap footer-bottom">© <span id="year"></span> BCHtools · Cypherpunk tool universe</div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/common.js"></script>
+<script>
+BCH.boot();
+(function () {
+  const grid = document.getElementById("highlightedGrid");
+  if (!grid) return;
+  const slugs = typeof HIGHLIGHTED_SLUGS !== "undefined" ? HIGHLIGHTED_SLUGS : [FEATURED_SLUG];
+  const list = slugs.map(s => getBySlug(s)).filter(Boolean);
+  if (!list.length) {
+    grid.innerHTML = `<p style="color:var(--ink-faint)">No highlighted projects configured.</p>`;
+    return;
+  }
+  grid.innerHTML = list.map((p, i) => BCH.cardHTML(p, i)).join("");
+  BCH.bindCards(grid);
+})();
+</script>
+</body>
+</html>
